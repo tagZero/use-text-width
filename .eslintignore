@@ -1,0 +1,6 @@
+dist/**
+coverage/**
+node_modules/**
+.eslintrc.js
+*.config.js
+styleMock.js
