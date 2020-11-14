@@ -1,8 +1,8 @@
 {
-  "name": "@imagemarker/usetextwidth",
+  "name": "@imagemarker/use-text-width",
   "version": "0.1.0",
   "description": "React hook to measure text width",
-  "repository": "github:imagemarker/useTextWidth",
+  "repository": "github:imagemarker/use-text-width",
   "keywords": [
     "react",
     "hook",
