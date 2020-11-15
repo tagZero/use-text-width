@@ -1,8 +1,8 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
-import typescript from '@rollup/plugin-typescript';
 import html from '@rollup/plugin-html';
 import postcss from 'rollup-plugin-postcss';
+import ts from "@wessberg/rollup-plugin-ts";
 
 const template = `
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ export default {
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE)
     }),
-    typescript(),
+    ts(),
     postcss({
       extract: false,
       use: ['sass']
