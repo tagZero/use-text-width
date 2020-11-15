@@ -1,5 +1,4 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from "rollup-plugin-terser";
@@ -27,12 +26,6 @@ export default {
       ...output,
       file: 'dist/es/index.js',
       format: 'es'
-    },
-    {
-      ...output,
-      file: 'dist/umd/index.js',
-      format: 'umd',
-      name: 'useTextWidth'
     }
   ],
   external: ['react', 'react-dom'],
@@ -45,8 +38,9 @@ export default {
       extract: false,
       use: ['sass']
     }),
-    nodeResolve(),
-    commonjs(),
+    nodeResolve({
+      browser: true
+    }),
     production ? terser() : null
   ]
 };
