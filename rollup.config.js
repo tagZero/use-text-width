@@ -6,35 +6,32 @@ import ts from "@wessberg/rollup-plugin-ts";
 
 const production = process.env.NODE_ENV === 'production';
 
+const output = {
+  sourcemap: !production,
+  globals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+  },
+}
+
 export default {
   input: 'src/index.ts',
   output: [
     {
+      ...output,
       file: 'dist/cjs/index.js',
-      sourcemap: !production,
-      format: 'cjs',
-      globals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-      },
+      format: 'cjs'
     },
     {
+      ...output,
       file: 'dist/es/index.js',
-      sourcemap: !production,
-      format: 'es',
-      globals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-      },
+      format: 'es'
     },
     {
+      ...output,
       file: 'dist/umd/index.js',
-      sourcemap: !production,
-      format: 'es',
-      globals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-      },
+      format: 'umd',
+      name: 'useTextWidth'
     }
   ],
   external: ['react', 'react-dom'],
