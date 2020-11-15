@@ -1,6 +1,6 @@
 {
   "name": "@imagemarker/use-text-width",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "React hook to measure text width",
   "repository": "github:imagemarker/use-text-width",
   "keywords": [
@@ -17,7 +17,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
-    "test": "jest --config=jest.config.js --passWithNoTests",
+    "test": "jest --config=jest.config.js",
     "build": "yarn clean && NODE_ENV=development rollup -c rollup.config.js",
     "build:prod": "yarn clean && NODE_ENV=production rollup -c rollup.config.js",
     "build:example": "yarn clean && rollup -c rollup.examples.config.js",

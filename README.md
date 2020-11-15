@@ -18,7 +18,7 @@ There are 2 types of usages:
 
 #### 1. text & font
 
-You can pass object having `text` (mandatory, string) and `font` (optional, CSS font string) properties to calculate width.
+You can pass object having `text` (mandatory, string or string[] returns max one) and `font` (optional, CSS font string) properties to calculate width. 
  
 ```jsx
 import { useTextWidth } from '@imagemarker/use-text-width';
