@@ -12,7 +12,7 @@ export default {
     dir: 'dist',
     name: 'useTextWidth',
     sourcemap: !production,
-    format: 'es',
+    format: 'cjs',
     globals: {
       'react': 'React',
       'react-dom': 'ReactDOM',
