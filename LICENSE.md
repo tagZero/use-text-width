@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2020-present ImageMarker <contact@imagemarker.io>
+Copyright (c) 2020-present Erhan Gundogan <erhan.gundogan@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

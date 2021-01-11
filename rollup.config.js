@@ -39,7 +39,7 @@ export default {
   external: ['react', 'react-dom'],
   plugins: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     postcss({
       extract: false,

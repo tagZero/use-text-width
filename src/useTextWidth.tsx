@@ -36,7 +36,7 @@ const useTextWidth: useTextWidthType = ({ text, ref, font = '16px Times' }) => {
     } else if (text) {
       setWidth(getTextWidth(text));
     }
-  }, [font, text]);
+  }, [font, ref, text]);
 
   return width;
 };

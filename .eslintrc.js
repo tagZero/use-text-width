@@ -1,34 +1,3 @@
-const rules = {
-  "arrow-body-style": ["error", "as-needed"],
-  "object-curly-spacing": [
-    2,
-    "always",
-    { "objectsInObjects": true }
-  ],
-  "jsx-quotes": ["error", "prefer-double"],
-  "no-multiple-empty-lines": "error",
-  "no-trailing-spaces": "error",
-  "curly": "error",
-  "comma-dangle": ["error", "never"],
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto",
-      "printWidth": 110,
-      "singleQuote": true,
-      "semi": true,
-      "tabWidth": 2,
-      "trailingComma": "none"
-    }
-  ]
-};
-
-const extendsConfigs = [
-  "eslint:recommended",
-  "plugin:react/recommended",
-  "plugin:prettier/recommended"
-];
-
 module.exports = {
   parser: "babel-eslint",
   env: {
@@ -39,19 +8,19 @@ module.exports = {
     jest: true,
     "jest/globals": true
   },
-  extends: extendsConfigs,
   overrides: [
     {
       files: ["*.ts", "*.tsx"],
       parser: "@typescript-eslint/parser",
       extends: [
-        ...extendsConfigs,
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
       ],
       rules: {
-        ...rules,
-
         "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
 
         "react/prop-types": "off",
         "react/no-unescaped-entities": "off",
@@ -66,18 +35,41 @@ module.exports = {
       }
     }
   ],
-  plugins: ["react-hooks", "jest"],
+  plugins: ["react-hooks", "jest", "jsx-a11y"],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: "module",
     ecmaFeatures: {
       jsx: true
     }
   },
-  rules,
   settings: {
     react: {
       version: "detect"
     }
+  },
+  rules: {
+    "arrow-body-style": ["error", "as-needed"],
+    "object-curly-spacing": [
+      2,
+      "always",
+      { "objectsInObjects": true }
+    ],
+    "jsx-quotes": ["error", "prefer-double"],
+    "no-multiple-empty-lines": "error",
+    "no-trailing-spaces": "error",
+    "curly": "error",
+    "comma-dangle": ["error", "never"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "printWidth": 110,
+        "singleQuote": true,
+        "semi": true,
+        "tabWidth": 2,
+        "trailingComma": "none"
+      }
+    ]
   }
 };
