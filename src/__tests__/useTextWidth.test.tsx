@@ -2,8 +2,8 @@ import { renderHook } from '@testing-library/react-hooks';
 import useTextWidth from '../useTextWidth';
 
 describe('useTextWidth', () => {
-  const setup = ({ text, font }: { text: string | string[]; font?: string }) =>
-    renderHook(() => useTextWidth({ text, font }));
+  const setup = (initialProps: { text: string | string[]; font?: string }) =>
+    renderHook((initialProps) => useTextWidth(initialProps), { initialProps });
 
   test('calculate text width with default font', () => {
     const { result } = setup({ text: 'Hello world!' });
@@ -17,6 +17,13 @@ describe('useTextWidth', () => {
 
   test('calculate max width in text array', () => {
     const { result } = setup({ text: ['foo', 'Hello world!', 'bar'] });
+    expect(result.current).toBe(81);
+  });
+
+  test('updates results when inputs are changed', () => {
+    const { result, rerender } = setup({ text: 'bar' });
+    expect(result.current).toBe(20);
+    rerender({ text: 'Hello world!' });
     expect(result.current).toBe(81);
   });
 
