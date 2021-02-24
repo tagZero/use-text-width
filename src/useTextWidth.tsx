@@ -38,12 +38,12 @@ const useTextWidth: useTextWidthType = (options) => {
 
   return useMemo(() => {
     if (refOptions?.ref) {
-      if (!refOptions.ref.current) return NaN;
+      if (!refOptions.ref.current || refOptions.ref.current.textContent === null) return NaN;
 
       const context = getContext();
       const computedStyles = window.getComputedStyle(refOptions.ref.current);
       context.font = computedStyles.font;
-      const metrics = context.measureText(refOptions.ref.current?.textContent ?? '');
+      const metrics = context.measureText(refOptions.ref.current.textContent);
 
       return metrics.width;
     } else if (textOptions?.text) {
