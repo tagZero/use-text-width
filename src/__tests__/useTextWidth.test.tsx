@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import useTextWidth from '../useTextWidth';
 
@@ -19,5 +18,10 @@ describe('useTextWidth', () => {
   test('calculate max width in text array', () => {
     const { result } = setup({ text: ['foo', 'Hello world!', 'bar'] });
     expect(result.current).toBe(81);
+  });
+
+  test('throws when options are missing', () => {
+    const { result } = renderHook(() => useTextWidth({}));
+    expect(result.error).toBeTruthy();
   });
 });

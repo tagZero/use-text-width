@@ -1,15 +1,21 @@
-import { useMemo } from 'react';
+import { RefObject, useMemo } from 'react';
+
+export interface useTextWidthOptions {
+  text?: string | string[];
+  font?: string;
+  ref?: RefObject<Element>;
+}
 
 export interface useTextWidthType {
-  ({ text, font, ref }: { text?: string | string[]; font?: string; ref?: any }): number;
+  ({ text, font, ref }: useTextWidthOptions): number;
 }
 
 const getContext = () => {
   const fragment: DocumentFragment = document.createDocumentFragment();
   const canvas: HTMLCanvasElement = document.createElement('canvas');
   fragment.appendChild(canvas);
-  return canvas.getContext('2d');
-}
+  return canvas.getContext('2d') as CanvasRenderingContext2D;
+};
 
 const getTextWidth = (currentText: string | string[], font: string) => {
   const context = getContext();
@@ -21,7 +27,7 @@ const getTextWidth = (currentText: string | string[], font: string) => {
     const metrics = context.measureText(currentText);
     return metrics.width;
   }
-}
+};
 
 const useTextWidth: useTextWidthType = ({ text, ref, font = '16px Times' }) => {
   return useMemo(() => {
@@ -29,11 +35,13 @@ const useTextWidth: useTextWidthType = ({ text, ref, font = '16px Times' }) => {
       const context = getContext();
       const computedStyles = window.getComputedStyle(ref.current);
       context.font = computedStyles.font;
-      const metrics = context.measureText(ref.current.textContent);
+      const metrics = context.measureText(ref.current.textContent ?? '');
       return metrics.width;
     } else if (text) {
       return getTextWidth(text, font);
     }
+
+    throw new TypeError('useTextWidth - Either `ref` OR `text` must be defined');
   }, [font, ref, text]);
 };
 
