@@ -52,7 +52,7 @@ const useTextWidth: useTextWidthType = (options) => {
     }
 
     throw new TypeError('useTextWidth - Either `ref` OR `text` must be defined');
-  }, [textOptions, refOptions]);
+  }, [textOptions?.text, textOptions?.font, refOptions?.ref]);
 };
 
 export default useTextWidth;
