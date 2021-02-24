@@ -1,13 +1,16 @@
 import { RefObject, useMemo } from 'react';
 
-export interface useTextWidthOptions {
-  text?: string | string[];
+export type useTextWidthTextOptions = {
+  text: string | string[];
   font?: string;
-  ref?: RefObject<Element>;
-}
+};
+
+export type useTextWidthRefOptions = {
+  ref: RefObject<Element>;
+};
 
 export interface useTextWidthType {
-  ({ text, font, ref }: useTextWidthOptions): number;
+  (options: useTextWidthTextOptions | useTextWidthRefOptions): number;
 }
 
 const getContext = () => {
@@ -29,20 +32,27 @@ const getTextWidth = (currentText: string | string[], font: string) => {
   }
 };
 
-const useTextWidth: useTextWidthType = ({ text, ref, font = '16px Times' }) => {
+const useTextWidth: useTextWidthType = (options) => {
+  const textOptions = useMemo(() => ('text' in options ? options : undefined), [options]);
+  const refOptions = useMemo(() => ('ref' in options ? options : undefined), [options]);
+
   return useMemo(() => {
-    if (ref && ref.current) {
+    if (refOptions) {
+      const { ref } = refOptions;
+      if (!ref.current) return NaN;
+
       const context = getContext();
       const computedStyles = window.getComputedStyle(ref.current);
       context.font = computedStyles.font;
-      const metrics = context.measureText(ref.current.textContent ?? '');
+      const metrics = context.measureText(ref.current?.textContent ?? '');
+
       return metrics.width;
-    } else if (text) {
-      return getTextWidth(text, font);
+    } else if (textOptions) {
+      return getTextWidth(textOptions.text, textOptions.font ?? '16px times');
     }
 
     throw new TypeError('useTextWidth - Either `ref` OR `text` must be defined');
-  }, [font, ref, text]);
+  }, [textOptions, refOptions]);
 };
 
 export default useTextWidth;
