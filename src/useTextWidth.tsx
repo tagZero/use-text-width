@@ -37,17 +37,16 @@ const useTextWidth: useTextWidthType = (options) => {
   const refOptions = useMemo(() => ('ref' in options ? options : undefined), [options]);
 
   return useMemo(() => {
-    if (refOptions) {
-      const { ref } = refOptions;
-      if (!ref.current) return NaN;
+    if (refOptions?.ref) {
+      if (!refOptions.ref.current) return NaN;
 
       const context = getContext();
-      const computedStyles = window.getComputedStyle(ref.current);
+      const computedStyles = window.getComputedStyle(refOptions.ref.current);
       context.font = computedStyles.font;
-      const metrics = context.measureText(ref.current?.textContent ?? '');
+      const metrics = context.measureText(refOptions.ref.current?.textContent ?? '');
 
       return metrics.width;
-    } else if (textOptions) {
+    } else if (textOptions?.text) {
       return getTextWidth(textOptions.text, textOptions.font ?? '16px times');
     }
 
