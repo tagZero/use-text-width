@@ -1,7 +1,7 @@
 import { RefObject, useMemo } from 'react';
 
 export type useTextWidthTextOptions = {
-  text: string | string[];
+  text: string | string[] | undefined;
   font?: string;
 };
 
@@ -37,9 +37,7 @@ const useTextWidth: useTextWidthType = (options) => {
   const refOptions = useMemo(() => ('ref' in options ? options : undefined), [options]);
 
   return useMemo(() => {
-    if (refOptions?.ref) {
-      if (!refOptions.ref.current || refOptions.ref.current.textContent === null) return NaN;
-
+    if (refOptions?.ref.current?.textContent) {
       const context = getContext();
       const computedStyles = window.getComputedStyle(refOptions.ref.current);
       context.font = computedStyles.font;
@@ -50,7 +48,7 @@ const useTextWidth: useTextWidthType = (options) => {
       return getTextWidth(textOptions.text, textOptions.font ?? '16px times');
     }
 
-    throw new TypeError('useTextWidth - Either `ref` OR `text` must be defined');
+    return NaN;
   }, [textOptions?.text, textOptions?.font, refOptions?.ref]);
 };
 

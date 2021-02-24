@@ -56,9 +56,8 @@ describe('useTextWidth', () => {
     expect(result.current).toBe(NaN);
   });
 
-  test('throws when options are missing', () => {
-    // @ts-expect-error
-    const { result } = renderHook(() => useTextWidth({}));
-    expect(result.error).toBeTruthy();
+  test('undefined text returns NaN', () => {
+    const { result } = renderHook(() => useTextWidth({ text: undefined }));
+    expect(result.current).toBe(NaN);
   });
 });
