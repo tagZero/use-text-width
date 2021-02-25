@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import useTextWidth from '../useTextWidth';
 
 const App = () => {
-  const ref = useRef();
+  const ref = useRef(null);
   const width = useTextWidth({ ref });
 
   console.log(width);
