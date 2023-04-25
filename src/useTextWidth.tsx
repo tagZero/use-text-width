@@ -44,7 +44,7 @@ const useTextWidth: useTextWidthType = (options) => {
       const metrics = context.measureText(refOptions.ref.current.textContent);
 
       return metrics.width;
-    } else if (textOptions?.text) {
+    } else if (textOptions?.text !== undefined) {
       return getTextWidth(textOptions.text, textOptions.font ?? '16px times');
     }
 
