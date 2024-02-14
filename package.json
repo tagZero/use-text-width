@@ -1,6 +1,6 @@
 {
   "name": "@tag0/use-text-width",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React hook to measure text width",
   "repository": {
     "type": "git",
